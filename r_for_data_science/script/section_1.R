@@ -1,4 +1,4 @@
-# this file contains the worked examples and solutions to the problems from section 1 of
+# this file contains worked examples and solutions to the problems from section 1 of
 # Wickham, H. et al 2023. "R for Data Science", O'Reilly.
 # the text is available at
 # https://r4ds.hadley.nz/data-visualize
@@ -92,7 +92,8 @@ ggplot(penguins,
 
 # scatterplots with facets
 ggplot(penguins,
-       aes(x = flipper_length_mm, y = body_mass_g)) +
+       aes(x = flipper_length_mm, y = body_mass_g)
+  ) +
   geom_point(aes(color = species, shape = species)) +
   facet_wrap(~island)
 

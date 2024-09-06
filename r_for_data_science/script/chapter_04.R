@@ -1,4 +1,4 @@
-# this file contains worked examples and solutions to the problems from section 4 of
+# this file contains worked examples and solutions to the problems from Chapter 4 of
 # Wickham, H. et al 2023. "R for Data Science", O'Reilly.
 # the text is available at
 # https://r4ds.hadley.nz/workflow-style

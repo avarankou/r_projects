@@ -1,4 +1,4 @@
-# this file contains the worked examples and solutions to the problems from Section 3 of
+# this file contains the worked examples and solutions to the problems from Chapter 3 of
 # Wickham, H. 2019. "Advanced R", Chapman and Hall.
 # the text is available at
 # https://adv-r.hadley.nz/vectors-chap.html

@@ -22,15 +22,47 @@ students <- students |>
     age = parse_number(if_else(age == "five", "5", age))
   )
 
-# read_csv() can be used with characted strings and has a number of handy arguments:
+# read_csv() can be used with character strings and has a number of handy arguments:
 # (i)   skip = N - to skip N first rows
 # (ii)  col_names = FALSE - no to treat the top row as headers
 # (iii) col_names = c(...) - to specify custom column names
 # (iv) comment = "#" - to specify the comment symbol
 
 
-# exercises 7.2.4
-# TODO
+
+# exercises 7.2.4 ---------------------------------------------------------
+
+# 7.2.4.1
+read_delim(delim = "|")
+
+# 7.2.4.2
+arg_read_csv <- names(formals("read_csv"))
+arg_read_tsv <- names(formals("read_tsv"))
+
+intersect(arg_read_csv, arg_read_tsv)
+length(setdiff(arg_read_csv, arg_read_tsv)) == 0 # TRUE; all 20 arguments are the same
+
+# 7.2.4.3
+# the most important arguments are col_positions and col_types
+?read_fwf
+
+
+# 7.2.4.4
+csv_content <- "x,y\n1,'a,b'"
+df <- read_csv(csv_content, quote = "'")
+
+# 7.2.4.5
+read_csv("a,b\n1,2,3\n4,5,6")
+read_csv("a,b,c\n1,2\n1,2,3,4")
+read_csv("a,b\n\"1")
+read_csv("a,b\n1,2\na,b")
+read_csv("a;b\n1;3")
+
+# 7.2.4.6
+annoying <- tibble(
+  `1` = 1:10,
+  `2` = `1` * 2 + rnorm(length(`1`))
+)
 
 
 # specifying column types -------------------------------------------------

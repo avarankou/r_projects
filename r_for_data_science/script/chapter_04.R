@@ -3,6 +3,9 @@
 # the text is available at
 # https://r4ds.hadley.nz/workflow-style
 
+
+# exercises 4.6 -----------------------------------------------------------
+
 flights |> 
   filter(dest=="IAH") |> 
   group_by(year, month, day) |> 

@@ -29,10 +29,31 @@ ggplot(mpg, aes(x = displ, y = hwy, shape = class)) +
 ggplot(mpg, aes(x = displ, y = hwy, size = class)) +
   geom_point()
 
-# exercises 9.2.1
-# TODO
 
-# not every aestheic works with every geom
+# exercises 9.2.1 ---------------------------------------------------------
+
+# 9.2.1.1
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(fill = "pink", shape = 25)
+
+# 9.2.1.2
+# the code below does not set colour because it is specified in aes() parameter of geom_point()
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, color = "blue"))
+
+# 9.2.1.3
+# stroke sets the width of a marker's border
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
+
+# 9.2.1.4
+# an aesthetic can be specified with a computed value or a computed column
+ggplot(mpg, aes(x = displ, y = hwy, colour = displ < 5)) +
+  geom_point(shape = 25)
+
+
+# geometric objects -------------------------------------------------------
+# not every aesthetic works with every geom
 # shape aesthetic does not work with geom_smooth() which, basically, draws a smooth curve that approximates data
 ggplot(mpg, aes(x = displ, y = hwy, shape = class)) +
   geom_smooth()
@@ -77,9 +98,52 @@ library(ggridges)
 ggplot(mpg, aes(x = hwy, y = drv, fill = drv, color = drv)) +
   geom_density_ridges(alpha = 0.5, show.legend = FALSE)
 
-# exercises 9.3.1
-# TODO
 
+# exercises 9.3.1 ---------------------------------------------------------
+
+# 9.3.1.1
+# geom_line(), geom_boxplot(), geom_histogram(), geom_area()
+
+# 9.3.1.2
+# show.legend = FALSE suppresses default behaviour which is to show the legend, if necessary
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth(aes(color = drv), show.legend = TRUE)
+
+# 9.3.1.3
+# se argument of geom_smooth enables and disables the display of the range of confidence interval
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_smooth(se = FALSE)
+
+# 9.3.1.4
+# top-left
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 3) +
+  geom_smooth(se = FALSE)
+
+# top-right
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 3) +
+  geom_smooth(aes(shape = drv), se = FALSE)
+
+# middle-left
+ggplot(mpg, aes(x = displ, y = hwy, colour = drv)) +
+  geom_point(size = 3) +
+  geom_smooth(se = FALSE, linewidth = 2)
+
+# middle-right
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 3, aes(colour = drv)) +
+  geom_smooth(se = FALSE, linewidth = 2)
+
+# bottom-left
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 3, shape = 16, aes(colour = drv)) +
+  geom_smooth(se = FALSE, aes(linetype = drv, linewidth = 2))
+
+# bottom-right
+ggplot(mpg, aes(x = displ, y = hwy, fill = drv)) +
+  geom_point(size = 3, shape = 21, colour = "white", stroke = 3)
 
 # facets ------------------------------------------------------------------
 # facets can be added for a single factor variable or for a combination of two factors

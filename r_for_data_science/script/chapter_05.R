@@ -27,8 +27,27 @@ ggplot(table, aes(x = year, y = infection_rate_per_1k)) +
   geom_line(aes(group = country, colour = "grey50")) +
   scale_x_continuous(breaks = c(1999, 2000))
 
-# exercises 5.2.1
-# TODO
+
+# exercises 5.2.1 ---------------------------------------------------------
+
+# 5.2.1.2
+table_2 <- pivot_longer(table, cols = c("cases", "population"), names_to = "type", values_to = "count")
+
+table_2 |> 
+  pivot_wider(names_from = "type", values_from = "count") |> 
+  mutate(infection_rate_per_1k = cases / population * 1000) |> 
+  ggplot(aes(x = year, y = infection_rate_per_1k)) +
+    geom_line(aes(group = country), colour = "grey50") +
+    geom_point(aes(colour = country)) +
+    scale_x_continuous(breaks = c(1999, 2000))
+
+table_3 <- table |> 
+  mutate(rate = stringr::str_c(cases, "/", population)) |> 
+  select(country, year, rate)
+
+table_3 |> 
+  separate(rate, sep = "/", into = c("cases", "population"))
+# then proceed as with table_2
 
 
 # pivoting data -----------------------------------------------------------

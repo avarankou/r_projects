@@ -32,9 +32,38 @@ flights |>
   filter(month == 1, day == 1) |> 
   arrange(desc(is.na(dep_time)), dep_time)
 
-# exercises 12.2.4
-# TODO
 
+# exercises 12.2.4 --------------------------------------------------------
+
+# 12.2.4.1
+# dplyr::near() compares the absolute difference of two numbers to a small epsilon, viz. the tolerable rounding error, rather than checks if the two numbers are equal
+x <- 1:25
+y <- sqrt(1:25) ^ 2
+
+sum(x == y) == length(x) # FALSE
+sum(dplyr::near(x, y)) == length(x) # TRUE
+
+
+# 12.2.4.2
+na_dep_time <- flights |> 
+  select(dep_time, sched_dep_time, dep_delay) |> 
+  filter(is.na(dep_time)) |> 
+  count()
+
+na_dep_delay <- flights |> 
+  select(dep_time, sched_dep_time, dep_delay) |> 
+  mutate(na = is.na(dep_time) | is.na(sched_dep_time) | is.na(dep_delay)) |> 
+  filter(is.na(dep_delay)) |> 
+  count()
+
+# hence, all flights that have an NA value of dep_time variable also have an NA value of dep_delay variable
+flights |> 
+  select(dep_time, sched_dep_time, dep_delay) |> 
+  mutate(na = is.na(dep_time) | is.na(sched_dep_time) | is.na(dep_delay)) |> 
+  filter(na & (!is.na(dep_time) | !is.na(dep_delay)))
+
+
+# boolean algebra ---------------------------------------------------------
 # to avoid writing long sequences of logical conditions pertaining to one variable, use value %in% range
 
 # note that %in% makes a proper check for NAs
@@ -75,6 +104,16 @@ flights |>
     n = n(),
     .groups = "drop"
   )
+
+
+# exercises 12.3.4 --------------------------------------------------------
+
+# 12.3.4.1
+flights |> 
+  filter(is.na(arr_delay) & !is.nad(dep_delay)) |> 
+  select(keep = used)
+
+
 
 # exercises 12.4.4
 # TODO

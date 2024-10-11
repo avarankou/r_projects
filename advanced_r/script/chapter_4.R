@@ -1,4 +1,4 @@
-# this file contains the worked examples and solutions to the problems from Chapter 4 of
+# this file contains worked examples and solutions to the problems from Chapter 4 of
 # Wickham, H. 2019. "Advanced R", Chapman and Hall.
 # the text is available at
 # https://adv-r.hadley.nz/subsetting.html
